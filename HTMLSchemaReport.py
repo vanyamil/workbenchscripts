@@ -12,7 +12,7 @@ title = "Database schema report in HTML format"
 ModuleInfo = DefineModule(
     name="DBHTMLReport", 
     author="Ivan Miloslavov", 
-    version="3.0", 
+    version="3.0.1", 
     description=title
 )
 
@@ -92,7 +92,7 @@ def htmlDataDictionary(catalog):
             for column in table.columns:
                 pk = ('No', 'Yes')[bool(table.isPrimaryKeyColumn(column))]
                 fk = ('No', 'Yes')[bool(table.isForeignKeyColumn(column))]
-                nn = ('No', 'Yes')[bool(column.isNotNull)]
+                nn = ('Yes', 'No')[bool(column.isNotNull)]
                 print(f"<tr><td>{column.name}</td><td>{column.formattedType}</td><td>{nn}</td><td>{pk}</td><td>{fk}</td><td>{column.defaultValue}</td><td>{column.comment}</td></tr>", file=htmlFile)
             print("</table><a href=\"#home\">Table List </a></br>", file=htmlFile)
         print("</body></html>", file=htmlFile)
